@@ -2,7 +2,7 @@ from src.MDFMeasurement import MDFMeasurement
 from src.SQLDatabase import SQLDatabase
 
 """
-Main program - Read data from .mf4 format and store data in sqlite3 database
+Main program - Read data from .mf4 format and store data in sqlite3 .db database
 """
 
 print('Read data from .mf4 format')

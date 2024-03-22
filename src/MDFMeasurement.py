@@ -24,6 +24,7 @@ class MDFMeasurement():
 
         for i in range(len(rows)):
             vehicle = vehicle
+            time = self.mdf.get(column[0]).timestamps[i]
             speed = self.mdf.get(column[0]).samples[i]
             n = self.mdf.get(column[1]).samples[i]
             md = self.mdf.get(column[2]).samples[i]
@@ -34,7 +35,7 @@ class MDFMeasurement():
             t_w_o = self.mdf.get(column[7]).samples[i]
             mf_fuel = self.mdf.get(column[8]).samples[i]
 
-            self.values = (vehicle, speed, n, md, nox_eo, nox_tp, t_oil, t_w_i, t_w_o, mf_fuel)
+            self.values = (vehicle, time, speed, n, md, nox_eo, nox_tp, t_oil, t_w_i, t_w_o, mf_fuel)
             self.data.append(self.values)
 
             # print(str(i+1)+' -> '+str(self.values)+'\n')

@@ -24,7 +24,7 @@ class SQLDatabase():
 
     def create_table(self, name):
         sql = """
-        CREATE TABLE data (ID INTEGER PRIMARY KEY AUTOINCREMENT, VEHICLE, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL)
+        CREATE TABLE data (ID INTEGER PRIMARY KEY AUTOINCREMENT, VEHICLE, TIME, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL)
         """
         if not self.is_table(name):
             self.cur.execute(sql)
@@ -32,22 +32,23 @@ class SQLDatabase():
     def insert(self, values):
 
         vehicle = values[0]
-        speed = values[1]
-        n = values[2]
-        md = values[3]
-        nox_eo = values[4]
-        nox_tp = values[5]
-        t_oil = values[6]
-        t_w_i = values[7]
-        t_w_o = values[8]
-        mf_fuel = values[9]
+        time = values[1]
+        speed = values[2]
+        n = values[3]
+        md = values[4]
+        nox_eo = values[5]
+        nox_tp = values[6]
+        t_oil = values[7]
+        t_w_i = values[8]
+        t_w_o = values[9]
+        mf_fuel = values[10]
 
         sql = """
-        INSERT INTO data (VEHICLE, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL) 
-        VALUES (?,?,?,?,?,?,?,?,?,?)
+        INSERT INTO data (VEHICLE, TIME, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL) 
+        VALUES (?,?,?,?,?,?,?,?,?,?,?)
         """
 
-        self.cur.execute(sql, (vehicle, speed, n, md, nox_eo, nox_tp, t_oil, t_w_i, t_w_o, mf_fuel))
+        self.cur.execute(sql, (vehicle, time, speed, n, md, nox_eo, nox_tp, t_oil, t_w_i, t_w_o, mf_fuel))
         self.conn.commit()
 
     def insert_all(self, data):
@@ -56,14 +57,14 @@ class SQLDatabase():
 
     def select(self):
         sql = """
-        SELECT ID, VEHICLE, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL FROM data
+        SELECT ID, VEHICLE, TIME, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL FROM data
         """
         res = self.cur.execute(sql)
         return res.fetchall()
     
     def select_by_id(self, id):
         sql = """
-        SELECT ID, VEHICLE, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL FROM data WHERE ID
+        SELECT ID, VEHICLE, TIME, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL FROM data WHERE ID
         """
         res = self.cur.execute(sql, (id,))
         return res.fetchall()
