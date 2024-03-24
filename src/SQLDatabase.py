@@ -11,9 +11,9 @@ class SQLDatabase():
 
     def is_table(self, name):
         sql = """
-        "SELECT name FROM sqlite_master WHERE type='table' AND name = ?"
+        SELECT name FROM sqlite_master WHERE type='table' AND name = ?
         """
-        self.cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", (name,))
+        self.cur.execute(sql, (name,))
         return self.cur.fetchone()
 
     def drop_table(self):
@@ -30,6 +30,10 @@ class SQLDatabase():
             self.cur.execute(sql)
 
     def insert(self, values):
+        sql = """
+        INSERT INTO data (VEHICLE, TIME, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL) 
+        VALUES (?,?,?,?,?,?,?,?,?,?,?)
+        """
 
         vehicle = values[0]
         time = values[1]
@@ -42,11 +46,6 @@ class SQLDatabase():
         t_w_i = values[8]
         t_w_o = values[9]
         mf_fuel = values[10]
-
-        sql = """
-        INSERT INTO data (VEHICLE, TIME, SPEED, N, MD, NOX_EO, NOX_TP, T_OIL, T_W_I, T_W_O, MF_FUEL) 
-        VALUES (?,?,?,?,?,?,?,?,?,?,?)
-        """
 
         self.cur.execute(sql, (vehicle, time, speed, n, md, nox_eo, nox_tp, t_oil, t_w_i, t_w_o, mf_fuel))
         self.conn.commit()
