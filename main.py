@@ -1,6 +1,7 @@
 import os
 from src.MDFMeasurement import MDFMeasurement
 from src.SQLDatabase import SQLDatabase
+from src.Measurement import Measurement
 
 """
 Main program - Read data from .mf4 format and store data in sqlite3 .db database
@@ -31,6 +32,9 @@ def main():
     sqld.close()
 
     print('Success!')
+
+    msrm = Measurement('database.db')
+    msrm.event_detection(0, 10, 'voznja')
 
 if __name__=="__main__":
     main()
