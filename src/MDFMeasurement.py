@@ -14,10 +14,10 @@ class MDFMeasurement():
 
     def set_data(self):
 
-        f = self.file.split('/')[-1]
+        f = self.file.split('\\')[-1]
         vehicle = f.split('_')[0] 
 
-        column = ['SPEED','N','MD','NOX_EO','NOX_TP','T_OIL','T_W_I','T_W_O','MF_FUEL']
+        column = ['SPEED','N','MD','NOX_EO','NOX_TP','T_OIL','T_W_I','T_W_O','MF_FUEL']     
         rows = self.mdf.get(column[0])
 
         print(f + ': ' + str(len(rows)) + ' rows')
@@ -38,19 +38,14 @@ class MDFMeasurement():
             self.values = (vehicle, time, speed, n, md, nox_eo, nox_tp, t_oil, t_w_i, t_w_o, mf_fuel)
             self.data.append(self.values)
 
-            # print(str(i+1)+' -> '+str(self.values)+'\n')
-            # print(str(i+1)+' -> '+str(self.data)+'\n')
-            # if i == 11: break
-            # l = len(rows) - (i+1)
-            # print(str(l)+'\n')
-
+            # regulate the number of rows for each file - for testing
             if i == 9:
                 return self.data
             
         return self.data
     
-    # set 'SPEED','N','MD','NOX_EO','NOX_TP','T_OIL','T_W_I','T_W_O','MF_FUEL'
-    # get 'SPEED','N','MD','NOX_EO','NOX_TP','T_OIL','T_W_I','T_W_O','MF_FUEL'
+    # set 'VEHICLE','TIME','SPEED','N','MD','NOX_EO','NOX_TP','T_OIL','T_W_I','T_W_O','MF_FUEL'
+    # get 'VEHICLE','TIME','SPEED','N','MD','NOX_EO','NOX_TP','T_OIL','T_W_I','T_W_O','MF_FUEL'
 
     def get_size(self):
         rows = self.mdf.get('SPEED')
