@@ -15,7 +15,7 @@ class Measurement():
         conn = sqlite3.connect(self.database, check_same_thread=False)
         cur = conn.cursor()
 
-        for id in range(1,10):
+        for id in range(start,end):
 
             cur.execute(sql,(id,))
             res = cur.fetchone()

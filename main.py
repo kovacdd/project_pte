@@ -34,7 +34,7 @@ def main():
     print('Success!')
 
     msrm = Measurement('database.db')
-    msrm.event_detection(0, 10, 'voznja')
+    msrm.event_detection(1, 10, 'voznja')
 
 if __name__=="__main__":
     main()
