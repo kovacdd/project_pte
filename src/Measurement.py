@@ -26,15 +26,19 @@ class Measurement():
 
         print(results)
 
+        duration = end-start
         distance_km = (results[-1][2]*results[-1][3])/3600
+        mean_oil_temperature = results[-1][8]
 
         event = {
             "start": start,
             "end": end,
             "event_name": event_name,
-            "duration": end - start,
+            "duration": duration,
             "KPI_1": distance_km,
-            "KPI_2": None
+            "KPI_2": mean_oil_temperature
         }
 
         print('Event: '+str(event))
+
+        return results
