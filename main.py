@@ -34,6 +34,9 @@ def main():
     print('Success!')
 
     msrm = Measurement('database.db')
+
+    print('Success!')
+    
     msrm.event_detection(1, 10, 'voznja')
 
 if __name__=="__main__":

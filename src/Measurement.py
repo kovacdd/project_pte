@@ -15,9 +15,9 @@ class Measurement():
         conn = sqlite3.connect(self.database, check_same_thread=False)
         cur = conn.cursor()
 
-        for id in range(start,end):
+        for time in range(start,end):
 
-            cur.execute(sql,(id,))
+            cur.execute(sql,(time,))
             res = cur.fetchone()
             results.append(res)
 
@@ -26,13 +26,15 @@ class Measurement():
 
         print(results)
 
+        distance_km = (results[-1][2]*results[-1][3])/3600
+
         event = {
             "start": start,
             "end": end,
             "event_name": event_name,
             "duration": end - start,
-            "KPI_1": None,
+            "KPI_1": distance_km,
             "KPI_2": None
         }
 
-        print(event)
+        print('Event: '+str(event))
